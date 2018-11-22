@@ -21,7 +21,7 @@ $titleUtdanning = $xmlUtdanning->getElementsByTagName("title");
 $mainEntry1 = $entryUtdanning->item(0);
 $mainTitle1 = $titleUtdanning->item(1);
 
-for ($i = 0; $i < $titleUtdanning->length; $i++) {
+for ($i = 0; $i < $entryUtdanning->length; $i++) {
     $title = $xmlUtdanning->getElementsByTagName("title");
 
     $mainTitle1 = $titleUtdanning->item($i+1);
@@ -31,9 +31,6 @@ for ($i = 0; $i < $titleUtdanning->length; $i++) {
 //    $category = $xmlUtdanning->getElementsByTagName("div");
 ////    $mainCategory = $category->item($i);
 ///     <td>', $mainCategory->nodeValue, PHP_EOL,'</td>
-
-
-
     echo '
 <html>
 <head>
@@ -46,12 +43,12 @@ for ($i = 0; $i < $titleUtdanning->length; $i++) {
     }
     
     #utdanningTable {
-        clear: left;
         width: 30%;
     }
     
     #jobbTable {
         top: 0;
+        width: 30%;
     }
 </style>
 </head>
@@ -66,8 +63,7 @@ for ($i = 0; $i < $titleUtdanning->length; $i++) {
     <td>', $mainEntry1->nodeValue, PHP_EOL, '</td>
   </tr>
 </table>
-</body>
-</html>';
+';
 }
 
 $entry = $xml->getElementsByTagName("feed");
@@ -102,7 +98,9 @@ for ($i = 0; $i < $entries->length; $i++ ) {
     <td>JobbBeskrivelse</td>
     <td>', $mainEntry->nodeValue, PHP_EOL, '</td>
   </tr>
-</table>';
+</table>
+</body>
+</html>';
 }
 
 ?>
