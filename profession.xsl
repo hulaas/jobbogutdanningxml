@@ -8,7 +8,7 @@
     </head>
     <body>
       <h1>Yrker</h1>
-        <xsl:for-each select="main/utdanninger">
+        <xsl:for-each select="utdanningogyrker/utdanninger">
           
           <table border="1px solid black" width="48%">
             <tr><th width="175px">Utdanningstittel</th><th>Utdanningsbeskrivelse</th><th>Formelle krav</th></tr>

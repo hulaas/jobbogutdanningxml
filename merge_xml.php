@@ -82,7 +82,7 @@ for ($i = 0; $i < $entries->length; $i++ ) {
         $entries1 = $xml->getElementsByTagName("content");
         $mainEntry1 = $entries1->item($i);
         $element2 = $doc->createElement('yrkeBeskrivelse');
-        $element2->nodeValue=$mainEntry1->nodeValue;
+        $element2->nodeValue=htmlspecialchars($mainEntry1->nodeValue);
         $startTagYrke->appendChild($element2);
     }
 }
