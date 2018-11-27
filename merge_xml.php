@@ -13,8 +13,10 @@ $entryUtdanning = $xmlUtdanning->getElementsByTagName("entry");
 
 $doc = new DOMDocument("1.0", "ISO-8859-1");
 $doc->formatOutput = true;
+
 $root = $doc->createElement('utdanningogyrker');
 $doc->appendChild($root);
+
 for ($i = 0; $i < $entryUtdanning->length; $i++) {
 
     $startTag = $doc->createElement('utdanninger');
@@ -29,13 +31,11 @@ for ($i = 0; $i < $entryUtdanning->length; $i++) {
     $prereq = $xmlUtdanning->getElementsByTagName("field_formal_prerequisites");
     $prereq1 = $prereq->item($i);
 
-
-
     if(!empty($mainTitle1->nodeValue)){
         $title = $xmlUtdanning->getElementsByTagName("title");
         $mainTitle1 = $title->item($i+1);
         $element1 = $doc->createElement('utdanningTittel');
-        $element1->nodeValue=$mainTitle1->nodeValue;
+        $element1->nodeValue=htmlspecialchars($mainTitle1->nodeValue);
         $startTag->appendChild($element1);
     }
 
@@ -43,7 +43,7 @@ for ($i = 0; $i < $entryUtdanning->length; $i++) {
         $entries1 = $xmlUtdanning->getElementsByTagName("content");
         $mainEntry1 = $entries1->item($i);
         $element2 = $doc->createElement('utdanningBeskrivelse');
-        $element2->nodeValue=$mainEntry1->nodeValue;
+        $element2->nodeValue=htmlspecialchars($mainEntry1->nodeValue);
         $startTag->appendChild($element2);
     }
 
@@ -51,7 +51,7 @@ for ($i = 0; $i < $entryUtdanning->length; $i++) {
         $prereq = $xmlUtdanning->getElementsByTagName("field_formal_prerequisites");
         $prereq1 = $prereq->item($i);
         $element3 = $doc->createElement('formelleKrav');
-        $element3->nodeValue=$prereq1->nodeValue;
+        $element3->nodeValue=htmlspecialchars($prereq1->nodeValue);
         $startTag->appendChild($element3);
     }
 
@@ -74,7 +74,7 @@ for ($i = 0; $i < $entries->length; $i++ ) {
         $title = $xml->getElementsByTagName("title");
         $mainTitle1 = $title->item($i+1);
         $element1 = $doc->createElement('yrkeTittel');
-        $element1->nodeValue=$mainTitle1->nodeValue;
+        $element1->nodeValue=htmlspecialchars($mainTitle1->nodeValue);
         $startTagYrke->appendChild($element1);
     }
 
@@ -86,6 +86,6 @@ for ($i = 0; $i < $entries->length; $i++ ) {
         $startTagYrke->appendChild($element2);
     }
 }
-$doc->save('utdanningogyrker.xml');
 
+$doc->save('utdanningogyrker.xml');
 ?>
