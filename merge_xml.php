@@ -1,91 +1,97 @@
 <?php
 $education = 'https://utdanning.no/data/atom/utdanningsbeskrivelse';
 $profession = 'https://utdanning.no/data/atom/yrke';
-//$hxml = simplexml_load_file($weather);
 
-$xml = new DOMDocument();
-$xml->load($profession);
+$file = 'utdanningogyrker.xml';
+$time = 600;
 
-$xmlUtdanning = new DOMDocument();
-$xmlUtdanning->load($education);
+if(file_exists($file) && time() - filemtime( $file ) >= $time) {
+    $xml = new DOMDocument();
+    $xml->load($profession);
 
-$entryUtdanning = $xmlUtdanning->getElementsByTagName("entry");
+    $xmlUtdanning = new DOMDocument();
+    $xmlUtdanning->load($education);
 
-$doc = new DOMDocument("1.0", "ISO-8859-1");
-$doc->formatOutput = true;
+    $entryUtdanning = $xmlUtdanning->getElementsByTagName("entry");
 
-$root = $doc->createElement('utdanningogyrker');
-$doc->appendChild($root);
+    $doc = new DOMDocument("1.0", "ISO-8859-1");
+    $doc->formatOutput = true;
 
-for ($i = 0; $i < $entryUtdanning->length; $i++) {
+    $root = $doc->createElement('utdanningogyrker');
+    $doc->appendChild($root);
 
-    $startTag = $doc->createElement('utdanninger');
-    $root->appendChild($startTag);
+    for ($i = 0; $i < $entryUtdanning->length; $i++) {
 
-    $title = $xmlUtdanning->getElementsByTagName("title");
-    $mainTitle1 = $title->item($i+1);
+        $startTag = $doc->createElement('utdanninger');
+        $root->appendChild($startTag);
 
-    $entries1 = $xmlUtdanning->getElementsByTagName("content");
-    $mainEntry1 = $entries1->item($i);
-
-    $prereq = $xmlUtdanning->getElementsByTagName("field_formal_prerequisites");
-    $prereq1 = $prereq->item($i);
-
-    if(!empty($mainTitle1->nodeValue)){
         $title = $xmlUtdanning->getElementsByTagName("title");
         $mainTitle1 = $title->item($i+1);
-        $element1 = $doc->createElement('utdanningTittel');
-        $element1->nodeValue=htmlspecialchars($mainTitle1->nodeValue);
-        $startTag->appendChild($element1);
-    }
 
-    if(!empty($mainEntry1->nodeValue)) {
         $entries1 = $xmlUtdanning->getElementsByTagName("content");
         $mainEntry1 = $entries1->item($i);
-        $element2 = $doc->createElement('utdanningBeskrivelse');
-        $element2->nodeValue=htmlspecialchars($mainEntry1->nodeValue);
-        $startTag->appendChild($element2);
-    }
 
-    if(!empty($prereq1->nodeValue)){
         $prereq = $xmlUtdanning->getElementsByTagName("field_formal_prerequisites");
         $prereq1 = $prereq->item($i);
-        $element3 = $doc->createElement('formelleKrav');
-        $element3->nodeValue=htmlspecialchars($prereq1->nodeValue);
-        $startTag->appendChild($element3);
+
+        if(!empty($mainTitle1->nodeValue)){
+            $title = $xmlUtdanning->getElementsByTagName("title");
+            $mainTitle1 = $title->item($i+1);
+            $element1 = $doc->createElement('utdanningTittel');
+            $element1->nodeValue=htmlspecialchars($mainTitle1->nodeValue);
+            $startTag->appendChild($element1);
+        }
+
+        if(!empty($mainEntry1->nodeValue)) {
+            $entries1 = $xmlUtdanning->getElementsByTagName("content");
+            $mainEntry1 = $entries1->item($i);
+            $element2 = $doc->createElement('utdanningBeskrivelse');
+            $element2->nodeValue=htmlspecialchars($mainEntry1->nodeValue);
+            $startTag->appendChild($element2);
+        }
+
+        if(!empty($prereq1->nodeValue)){
+            $prereq = $xmlUtdanning->getElementsByTagName("field_formal_prerequisites");
+            $prereq1 = $prereq->item($i);
+            $element3 = $doc->createElement('formelleKrav');
+            $element3->nodeValue=htmlspecialchars($prereq1->nodeValue);
+            $startTag->appendChild($element3);
+        }
+
     }
+    $entries = $xml->getElementsByTagName("entry");
 
-}
-$entries = $xml->getElementsByTagName("entry");
+    for ($i = 0; $i < $entries->length; $i++ ) {
 
-for ($i = 0; $i < $entries->length; $i++ ) {
+        $startTagYrke = $doc->createElement('yrker');
+        $root->appendChild($startTagYrke);
 
-    $startTagYrke = $doc->createElement('yrker');
-    $root->appendChild($startTagYrke);
-
-    $title = $xml->getElementsByTagName("title");
-    $mainTitle1 = $title->item($i+1);
-
-    $entries1 = $xml->getElementsByTagName("content");
-    $mainEntry1 = $entries1->item($i);
-
-
-    if(!empty($mainTitle1->nodeValue)){
         $title = $xml->getElementsByTagName("title");
         $mainTitle1 = $title->item($i+1);
-        $element1 = $doc->createElement('yrkeTittel');
-        $element1->nodeValue=htmlspecialchars($mainTitle1->nodeValue);
-        $startTagYrke->appendChild($element1);
-    }
 
-    if(!empty($mainEntry1->nodeValue)) {
         $entries1 = $xml->getElementsByTagName("content");
         $mainEntry1 = $entries1->item($i);
-        $element2 = $doc->createElement('yrkeBeskrivelse');
-        $element2->nodeValue=htmlspecialchars($mainEntry1->nodeValue);
-        $startTagYrke->appendChild($element2);
+
+
+        if(!empty($mainTitle1->nodeValue)){
+            $title = $xml->getElementsByTagName("title");
+            $mainTitle1 = $title->item($i+1);
+            $element1 = $doc->createElement('yrkeTittel');
+            $element1->nodeValue=htmlspecialchars($mainTitle1->nodeValue);
+            $startTagYrke->appendChild($element1);
+        }
+
+        if(!empty($mainEntry1->nodeValue)) {
+            $entries1 = $xml->getElementsByTagName("content");
+            $mainEntry1 = $entries1->item($i);
+            $element2 = $doc->createElement('yrkeBeskrivelse');
+            $element2->nodeValue=htmlspecialchars($mainEntry1->nodeValue);
+            $startTagYrke->appendChild($element2);
+        }
     }
+
+    $doc->save('utdanningogyrker.xml');
 }
 
-$doc->save('utdanningogyrker.xml');
+
 ?>
