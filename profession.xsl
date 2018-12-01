@@ -13,13 +13,14 @@
                     <p>Vise innholdet til xml-filen</p>
                     <p>Søk på yrker eller utdanning</p>
 
+
+                    <section>
+                        <div>
+                            <input type="submit" value="Alle utdanninger"/>
+                            <input type="submit" value="Alle yrker"/>
+                        </div>
+                    </section>
                 </main>
-                <section>
-                    <div>
-                        <input type="submit" value="Alle utdanninger"/>
-                        <input type="submit" value="Alle yrker"/>
-                    </div>
-                </section>
             </body>
         </html>
     </xsl:template>
