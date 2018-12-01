@@ -4,6 +4,9 @@ html, body {
     height: 100%;
     width: 100%;
 }
+.root {
+    margin-top: 70px; /* Add a top margin to avoid content overlay */
+}
 
 
 
