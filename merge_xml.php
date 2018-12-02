@@ -1,3 +1,5 @@
+
+/* Document that merges two xml-files to one xml-file. */
 <?php
 $education = 'https://utdanning.no/data/atom/utdanningsbeskrivelse';
 $profession = 'https://utdanning.no/data/atom/yrke';
@@ -5,7 +7,8 @@ $profession = 'https://utdanning.no/data/atom/yrke';
 $file = 'utdanningogyrker.xml';
 $time = 600;
 
-if(file_exists($file) && time() - filemtime( $file ) >= $time) {
+// Updating only if it's 10 minutes since last update
+if(file_exists($file) && time() - filemtime($file) >= $time) {
     $xml = new DOMDocument();
     $xml->load($profession);
 
@@ -31,12 +34,9 @@ if(file_exists($file) && time() - filemtime( $file ) >= $time) {
         $entries1 = $xmlUtdanning->getElementsByTagName("content");
         $mainEntry1 = $entries1->item($i);
 
-        $prereq = $xmlUtdanning->getElementsByTagName("field_formal_prerequisites");
-        $prereq1 = $prereq->item($i);
 
         if(!empty($mainTitle1->nodeValue)){
             $title = $xmlUtdanning->getElementsByTagName("title");
-            $mainTitle1 = $title->item($i+1);
             $element1 = $doc->createElement('utdanningTittel');
             $element1->nodeValue=htmlspecialchars($mainTitle1->nodeValue);
             $startTag->appendChild($element1);
@@ -48,14 +48,6 @@ if(file_exists($file) && time() - filemtime( $file ) >= $time) {
             $element2 = $doc->createElement('utdanningBeskrivelse');
             $element2->nodeValue=htmlspecialchars($mainEntry1->nodeValue);
             $startTag->appendChild($element2);
-        }
-
-        if(!empty($prereq1->nodeValue)){
-            $prereq = $xmlUtdanning->getElementsByTagName("field_formal_prerequisites");
-            $prereq1 = $prereq->item($i);
-            $element3 = $doc->createElement('formelleKrav');
-            $element3->nodeValue=htmlspecialchars($prereq1->nodeValue);
-            $startTag->appendChild($element3);
         }
 
     }
@@ -75,7 +67,6 @@ if(file_exists($file) && time() - filemtime( $file ) >= $time) {
 
         if(!empty($mainTitle1->nodeValue)){
             $title = $xml->getElementsByTagName("title");
-            $mainTitle1 = $title->item($i+1);
             $element1 = $doc->createElement('yrkeTittel');
             $element1->nodeValue=htmlspecialchars($mainTitle1->nodeValue);
             $startTagYrke->appendChild($element1);
@@ -90,7 +81,7 @@ if(file_exists($file) && time() - filemtime( $file ) >= $time) {
         }
     }
 
-    $doc->save('utdanningogyrker.xml');
+    $doc->save('xml/utdanningogyrker.xml');
 }
 
 
