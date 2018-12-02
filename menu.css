@@ -6,7 +6,7 @@
 
 /* The navigation bar */
 .navbar {
-    overflow: hidden;
+
     background-color: #333;
     position: fixed; /* Set the navbar to fixed position */
     top: 0; /* Position the navbar at the top of the page */
@@ -34,6 +34,7 @@
     /*the container must be positioned relative:*/
     position: relative;
     display: inline-block;
+
 }
 input {
     border: 1px solid transparent;
@@ -51,11 +52,17 @@ input[type=submit] {
     border: 1px solid #d4d4d4;
     border-bottom: none;
     border-top: none;
-    z-index: 99;
+    z-index: auto;
     /*position the autocomplete items to be the same width as the container:*/
     top: 100%;
     left: 0;
     right: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding to account for vertical scrollbar */
+
 }
 .autocomplete-items div {
     padding: 10px;
