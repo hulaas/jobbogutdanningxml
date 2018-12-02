@@ -5,12 +5,7 @@ html, body {
     width: 100%;
 }
 .root {
+    text-align: center;
     margin-top: 70px; /* Add a top margin to avoid content overlay */
 
 }
-
-
-
-
-
-

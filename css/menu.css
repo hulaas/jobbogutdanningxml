@@ -1,3 +1,9 @@
+
+#searchfunction {
+  float:right;
+  margin-right: 15px;
+}
+
 /* The navigation bar */
 .navbar {
     background-color: #333;
