@@ -7,7 +7,7 @@ $xml = new DOMDocument();
 $xml->load("xml/utdanningogyrker.xml");
 
 $elm = new DOMDocument();
-$elm->load("xsl/default.xsl");
+$elm->load("default.xsl");
 $xslt = new XSLTProcessor();
 $xslt->importStylesheet($elm);
 echo $resultat = $xslt->transformToXML($xml);
@@ -30,7 +30,7 @@ if(isset($_POST['submit'])) {
             }
 
             ?>
-            <table class="yrketable" border="1px solid black">
+            <table class="table table-striped">
                 <tr>
                     <th width="175px">Yrkestittel</th>
                     <th>Yrkesbeskrivelse</th></tr>
@@ -54,7 +54,7 @@ if(isset($_POST['submit'])) {
                 $description = $educationDescription->item(0)->nodeValue;
             }
             ?>
-            <table class="yrketable" border="1px solid black">
+            <table class="table table-striped">
                 <tr>
                     <th width="175px">Utdanningstittel</th>
                     <th>Utdanningsbeskrivelse</th></tr>

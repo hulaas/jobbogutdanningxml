@@ -4,12 +4,12 @@
         <html>
             <head>
                 <title>TestSide</title>
-                <link rel="stylesheet" type="text/css" href="../css/tables.css"/>
+                <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
             </head>
             <body>
-                <section class="root">
+                <section class="root-table">
                     <div class="leftcolumn">
-                        <table class="utdanningtable">
+                        <table class="table table-striped">
                             <tr>
                                 <th>Utdanningstittel</th>
                                 <th>Utdanningsbeskrivelse</th>
