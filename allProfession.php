@@ -1,10 +1,10 @@
 <?php
 include('menu.html');
 $xml = new DOMDocument();
-$xml->load("utdanningogyrker.xml");
+$xml->load("xml/utdanningogyrker.xml");
 
 $elm = new DOMDocument();
-$elm->load("allProfession.xsl");
+$elm->load("xsl/allProfession.xsl");
 $xslt = new XSLTProcessor();
 $xslt->importStylesheet($elm);
 echo $resultat = $xslt->transformToXML($xml);

@@ -1,43 +1,70 @@
-<?php 
+<?php
+
 include_once('merge_xml.php');
 include('menu.html');
 
 $xml = new DOMDocument();
-$xml->load("utdanningogyrker.xml");
+$xml->load("xml/utdanningogyrker.xml");
 
 $elm = new DOMDocument();
-$elm->load("profession.xsl");
+$elm->load("xsl/default.xsl");
 $xslt = new XSLTProcessor();
 $xslt->importStylesheet($elm);
 echo $resultat = $xslt->transformToXML($xml);
 
 
-
-$isPressed = false;
 $searchByWord = '';
 $titleList[] = null;
 if(isset($_POST['submit'])) {
     $searchByWord = $_POST['search'];
     $professions = $xml->getElementsByTagName('yrker');
+    $description = null;
     foreach($professions as $profession) {
         $professionTitle = $profession->getElementsByTagName('yrkeTittel');
-        if(like_match($professionTitle->item(0)->nodeValue, $searchByWord) ) {
-            $titleList[] = $professionTitle->item(0)->nodeValue;
+        $professionsDescription = $profession->getElementsByTagName('yrkeBeskrivelse');
+        $ifNotEmpty = $professionsDescription->item(0);
+        if($professionTitle->item(0)->nodeValue == $searchByWord ) {
+            $title = $professionTitle->item(0)->nodeValue;
+            if(!empty($ifNotEmpty->nodeValue)) {
+                $description = $professionsDescription->item(0)->nodeValue;
+            }
+
+            ?>
+            <table class="yrketable" border="1px solid black">
+                <tr>
+                    <th width="175px">Yrkestittel</th>
+                    <th>Yrkesbeskrivelse</th></tr>
+                <tr>
+                    <td width="175px"><?php echo $title?></td>
+                    <td width="400px"><?php echo $description?></td>
+                </tr>
+            </table>
+            <?php
         }
     }
-    print_r($titleList);
-    $isPressed = true;
-}
 
-
-
-
-
-include('search.php');
-
-function like_match($pattern, $subject)
-{
-    $pattern = str_replace('%', '.*', preg_quote($pattern, '/'));
-    return (bool) preg_match("/^{$pattern}$/i", $subject);
+    $educations = $xml->getElementsByTagName('utdanninger');
+    foreach($educations as $education) {
+        $educationTitle = $education->getElementsByTagName('utdanningTittel');
+        $educationDescription = $education->getElementsByTagName('utdanningBeskrivelse');
+        $ifNotEmpty = $educationDescription->item(0);
+        if($educationTitle->item(0)->nodeValue == $searchByWord ) {
+            $title = $educationTitle->item(0)->nodeValue;
+            if(!empty($ifNotEmpty->nodeValue)) {
+                $description = $educationDescription->item(0)->nodeValue;
+            }
+            ?>
+            <table class="yrketable" border="1px solid black">
+                <tr>
+                    <th width="175px">Utdanningstittel</th>
+                    <th>Utdanningsbeskrivelse</th></tr>
+                <tr>
+                    <td width="175px"><?php echo $title?></td>
+                    <td width="400px"><?php echo $description?></td>
+                </tr>
+            </table>
+            <?php
+        }
+    }
 }
 ?>

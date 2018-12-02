@@ -4,7 +4,7 @@
         <html>
             <head>
                 <title>TestSide</title>
-                <link rel="stylesheet" type="text/css" href="profession.css"/>
+                <link rel="stylesheet" type="text/css" href="../css/default.css"/>
             </head>
             <body>
                 <main class="root">
