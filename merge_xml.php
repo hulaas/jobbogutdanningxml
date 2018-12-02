@@ -1,5 +1,5 @@
 
-/* Document that merges two xml-files to one xml-file. */
+<!--Document that merges two xml-files to one xml-file.-->
 <?php
 $education = 'https://utdanning.no/data/atom/utdanningsbeskrivelse';
 $profession = 'https://utdanning.no/data/atom/yrke';
