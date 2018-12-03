@@ -77,12 +77,12 @@ if(isset($_POST['submit'])) {
 
 //Returns true og false if params match
 function like_match($searchParam, $subject) {
-    $preg = preg_grep("/(.*)" . $searchParam . "(.*)/", [strtolower($subject)]);
+    $preg = preg_grep("/(.*)" . strtolower($searchParam) . "(.*)/", [strtolower($subject)]);
     if(!empty($preg)){
         return true;
     }
     return false;
 }
-//Denne siden er utviklet av Fredrik Ravndal og Fredrik Hulaas
-//Denne siden er kontrollert av Håvard Betten og Ola Bredviken
+//Denne siden er utviklet av Fredrik Ravndal og Fredrik Hulaas, sist endret 03.12.2018
+//Denne siden er kontrollert av Håvard Betten og Ola Bredviken, sist kontrollert 03.12.2018
 ?>

@@ -132,3 +132,6 @@ function autocomplete(inp, arr) {
 
 /*initiate the autocomplete function on the "myInput" element, and pass along the titles array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), titles);
+
+/* Denne siden er utviklet av Fredrik Ravndal, sist endret 03.12.2018 */
+/* Denne siden er kontrollert av Fredrik Hulaas, sist kontrollert 03.12.2018 */
