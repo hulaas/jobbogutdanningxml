@@ -10,7 +10,7 @@
                 <main class="jumbotron">
                     <div class="container">
                     <h1 class="display-3">Formål med nettsiden<br/></h1>
-                    <p>Formålet med denne siden er å vise alle utdanninger og yrker for å se hvilke utdanninger man må velge for hvilke yrker.</p>
+                    <p>Formålet med denne siden er å hente xml-data fra utdanning.no og presentere dataen.</p>
 
                     <p>Vi har hentet ut data fra utdanning.no, og viser til link under:</p>
                     <a class="btn btn-primary btn-lg" role="button" href="https://utdanning.no/data/atom/utdanningsbeskrivelse/">Utdanninger</a>
@@ -20,4 +20,6 @@
             </body>
         </html>
     </xsl:template>
+    <!-- Denne filen er utviklet av Fredrik Ravndal og Fredrik Hulaas, sist endret 03.12.2018
+         Denne filen er kontrollert av Ola Bredviken og Håvard Betten sist kontrollert 03.12.2018  -->
 </xsl:stylesheet>
