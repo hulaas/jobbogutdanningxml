@@ -22,7 +22,7 @@ if(file_exists($file) && time() - filemtime($file) >= $time) {
     $doc->formatOutput = true;
 
     //append the root element of our xml-structure
-    $root = $doc->createElement('utdanningogyrker');
+    $root = $doc->createElement('utdanningOgYrker');
     $doc->appendChild($root);
 
     // for-loop for the education xml
