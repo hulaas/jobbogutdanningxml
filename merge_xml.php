@@ -9,9 +9,10 @@ $time = 600;
 
 // Updating only if it's 10 minutes since last update
 if(file_exists($file) && time() - filemtime($file) >= $time) {
+
+    // Load the remote xml files from utdanning.no
     $xml = new DOMDocument();
     $xml->load($profession);
-
     $xmlUtdanning = new DOMDocument();
     $xmlUtdanning->load($education);
 
@@ -21,7 +22,7 @@ if(file_exists($file) && time() - filemtime($file) >= $time) {
     $doc->formatOutput = true;
 
     //append the root element of our xml-structure
-    $root = $doc->createElement('utdanningogyrker');
+    $root = $doc->createElement('utdanningOgYrker');
     $doc->appendChild($root);
 
     // for-loop for the education xml
@@ -92,6 +93,6 @@ if(file_exists($file) && time() - filemtime($file) >= $time) {
     $doc->save('xml/utdanningogyrker.xml');
 }
 
-/* Denne filen er utviklet av Fredrik Hulaas og Fredrik Ravndal  */
-/* Denne filen er kontrollert av Ola Bredviken og Håvard Betten  */
+/* Denne filen er utviklet av Fredrik Hulaas og Fredrik Ravndal
+   Denne filen er kontrollert av Ola Bredviken og Håvard Betten  */
 ?>
