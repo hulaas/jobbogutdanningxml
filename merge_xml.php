@@ -38,14 +38,14 @@ if(file_exists($file) && time() - filemtime($file) >= $time) {
         $entries1 = $xmlUtdanning->getElementsByTagName("content");
         $mainEntry1 = $entries1->item($i);
 
-        //make sure the node is not empty
+        //make sure the title-node is not empty
         if(!empty($mainTitle1->nodeValue)){
             $title = $xmlUtdanning->getElementsByTagName("title");
             $element1 = $doc->createElement('utdanningTittel');
             $element1->nodeValue=htmlspecialchars($mainTitle1->nodeValue);
             $startTag->appendChild($element1);
         }
-
+        //make sure the content-node is not empty
         if(!empty($mainEntry1->nodeValue)) {
             $entries1 = $xmlUtdanning->getElementsByTagName("content");
             $mainEntry1 = $entries1->item($i);
@@ -71,7 +71,7 @@ if(file_exists($file) && time() - filemtime($file) >= $time) {
         $entries1 = $xml->getElementsByTagName("content");
         $mainEntry1 = $entries1->item($i);
 
-        //make sure the node is not empty
+        //make sure the title-node is not empty
         if(!empty($mainTitle1->nodeValue)){
             $title = $xml->getElementsByTagName("title");
             $element1 = $doc->createElement('yrkeTittel');
@@ -79,6 +79,7 @@ if(file_exists($file) && time() - filemtime($file) >= $time) {
             $startTagYrke->appendChild($element1);
         }
 
+        //make sure the content-node is not empty
         if(!empty($mainEntry1->nodeValue)) {
             $entries1 = $xml->getElementsByTagName("content");
             $mainEntry1 = $entries1->item($i);
@@ -91,6 +92,6 @@ if(file_exists($file) && time() - filemtime($file) >= $time) {
     $doc->save('xml/utdanningogyrker.xml');
 }
 
-/* Denne filen er utviklet av Fredrik Hulaas */
-/* Denne filen er kontrollert av  og */
+/* Denne filen er utviklet av Fredrik Hulaas og Fredrik Ravndal  */
+/* Denne filen er kontrollert av Ola Bredviken og Håvard Betten  */
 ?>
